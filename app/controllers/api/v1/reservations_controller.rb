@@ -18,7 +18,7 @@ class Api::V1::ReservationsController < Api::V1::ApplicationController
   api :GET, 'api/v1/reservations', 'show all reservations'
   returns array_of: :reservation, code: 200, desc: 'should return'
   def index
-    render json: policy_scope(Reservation).includes(:restaurant, :user), serialize_each: ReservationSerializer
+    render json: policy_scope(Reservation).includes(:restaurant, :user), serialize_each: Api::V1::ReservationSerializer
   end
 
   # Create
@@ -108,7 +108,9 @@ class Api::V1::ReservationsController < Api::V1::ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:start_time, :covers, :notes, :restaurant_id, :user_id)
+    attributes = %i[start_time notes restaurant_id user_id]
+    attributes.push(covers: [])
+    params.require(:reservation).permit(attributes)
   end
 end
 
