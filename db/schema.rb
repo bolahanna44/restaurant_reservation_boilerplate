@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_084014) do
+ActiveRecord::Schema.define(version: 2019_11_03_115623) do
 
   create_table "reservations", force: :cascade do |t|
     t.string "status"
     t.datetime "start_time"
     t.text "covers"
     t.text "notes"
-    t.integer "restaurant_id", null: false
+    t.integer "restaurant_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2019_11_03_084014) do
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "role"
+    t.string "role"
     t.string "first_name"
     t.string "last_name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

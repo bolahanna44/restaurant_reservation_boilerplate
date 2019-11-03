@@ -1,5 +1,5 @@
 class Restaurant < ApplicationRecord
-  has_many :reservations
+  has_many :reservations, dependent: :nullify
   belongs_to :user
 
   validates :name, presence: true
