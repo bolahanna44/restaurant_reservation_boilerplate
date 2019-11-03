@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :email, presence: true
   validates :role, presence: true
+
+  has_many :restaurants
+  has_many :reservations
+  has_many :restaurant_reservations, through: :restaurants, source: :reservations
 end

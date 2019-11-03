@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'devise'
 require 'support/login_macros'
+require 'pundit/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

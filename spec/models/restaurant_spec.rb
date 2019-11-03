@@ -18,10 +18,6 @@ RSpec.describe Restaurant, type: :model do
        expect(build(:restaurant, cuisines: nil)).not_to be_valid
      end
 
-     it "should be invalid without email" do
-       expect(build(:restaurant, email: nil)).not_to be_valid
-     end
-
      it "should be invalid without location" do
        expect(build(:restaurant, location: nil)).not_to be_valid
      end

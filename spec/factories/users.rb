@@ -4,6 +4,7 @@ FactoryBot.define do
     last_name { 'Hanna' }
     sequence(:email) { |n| "bola.hanna#{n}#{n}@gmail.com"}
     password { 12345678 }
+    role { 'guest' }
 
     factory :restaurant_user do
       role { 'restaurant' }
