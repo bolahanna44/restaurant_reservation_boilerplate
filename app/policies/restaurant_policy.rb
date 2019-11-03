@@ -5,7 +5,15 @@ class RestaurantPolicy < ApplicationPolicy
     end
   end
 
-  def index
+  def create?
     @user.admin?
+  end
+
+  def update?
+    create?
+  end
+
+  def destroy?
+    create?
   end
 end
