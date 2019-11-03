@@ -1,12 +1,11 @@
 class Api::V1::RestaurantsController < Api::V1::ApplicationController
-  before_action :authenticate_user
-
   def index
-    render json: policy_scope(Restaurant), serialize_each: RestaurantSerializer
+    render json: policy_scope(Restaurant), serialize_each: Api::V1::RestaurantSerializer
   end
 
   def create
     restaurant = Restaurant.new(restaurant_params)
+    authorize restaurant
 
     if restaurant.save
       render json: restaurant
@@ -27,6 +26,7 @@ class Api::V1::RestaurantsController < Api::V1::ApplicationController
 
   def update
     restaurant = load_restaurant
+    authorize restaurant
 
     if restaurant.update(restaurant_params)
       render json: restaurant
@@ -37,6 +37,7 @@ class Api::V1::RestaurantsController < Api::V1::ApplicationController
 
   def destroy
     restaurant = load_restaurant
+    authorize restaurant
 
     if restaurant.present? && restaurant.destroy
       head :ok
@@ -50,15 +51,11 @@ class Api::V1::RestaurantsController < Api::V1::ApplicationController
 
   private
 
-  def authenticate_user
-    authorize Restaurant, :index
-  end
-
   def load_restaurant
     Restaurant.find_by(id: params[:id])
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:start_time, :covers, :user_id)
+    params.require(:restaurant).permit(:opening_hours, :cuisines, :location, :phone, :name, :user_id)
   end
 end
